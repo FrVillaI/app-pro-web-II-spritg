@@ -14,9 +14,12 @@ public class Usuario {
     private Long usuarioId;
     private String nombre;
     private String apellido;
-    private String correoElectroncico;
+    private String email;
     private String password;
     private String rol;
+    private String genero;
+    private String rolUser;
+
 
 
 
