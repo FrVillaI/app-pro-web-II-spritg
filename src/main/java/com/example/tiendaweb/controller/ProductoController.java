@@ -32,4 +32,20 @@ public class ProductoController {
     public void deleteProducto(@PathVariable Long id) {
         productoService.deleteProducto(id);
     }
+    @PutMapping("/{id}")
+    public Producto updateProducto(@PathVariable Long id, @RequestBody Producto producto) {
+        Producto existingProducto = productoService.getProductoById(id);
+        if (existingProducto != null) {
+            existingProducto.setNombre(producto.getNombre());
+            existingProducto.setCodigo(producto.getCodigo());
+            existingProducto.setDescripcion(producto.getDescripcion());
+            existingProducto.setCategoria(producto.getCategoria());
+            existingProducto.setPrecio(producto.getPrecio());
+            existingProducto.setUrl(producto.getUrl());
+            return productoService.saveProducto(existingProducto);
+        } else {
+            // Manejar el caso cuando el producto no existe (puede lanzar una excepción o retornar una respuesta adecuada)
+            throw new RuntimeException("Producto no encontrado");
+        }
+    }
 }
